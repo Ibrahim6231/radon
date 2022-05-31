@@ -1,0 +1,3 @@
+this file has been created by mistake, but one thing that i observe here is that
+with cat > newfileName means it creates a file + allows to add content in it also
+
