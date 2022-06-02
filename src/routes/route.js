@@ -2,6 +2,34 @@ const express = require('express');
 const lodash = require('lodash');
 
 const router = express.Router();
+
+router.get('/movies', function (req, res) {
+    const arrMovies = ["3Idiots","Dhamaal","Jurassic Park", "Avengers", "Captain Marvel", "Thor Ragnarok"];
+    console.log(arrMovies)
+    res.send('listing out movies!')
+});
+
+router.get('/movies/:indexNumber', function (req, res) {
+    const arrMovies = ["3Idiots","Dhamaal","Jurassic Park", "Avengers", "Captain Marvel", "Thor Ragnarok"];
+    if(req.params.indexNumber >= arrMovies.length){
+        console.log("error: use a valid index")
+        res.send('error: use a valid index!')
+    }else{
+        console.log(arrMovies[req.params.indexNumber])
+        res.send('listing out movies!')
+    }
+    
+});
+
+
+
+
+
+
+
+
+
+
 router.get('/Hello', function (req, res) {
 
     //chunk
