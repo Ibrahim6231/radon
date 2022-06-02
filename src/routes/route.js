@@ -1,30 +1,38 @@
 const express = require('express');
-const externalModule = require('./logger')
+const lodash = require('lodash');
 
 const router = express.Router();
+router.get('/Hello', function (req, res) {
 
-router.get('/test-me', function (req, res) {
-    console.log('The constant in logger route has a value '+externalModule.endpoint)
-    console.log('The current batch is '+externalModule.batch)
-    externalModule.log()
-    res.send('My first ever api!')
-});
+    //chunk
+    const months = ["January", "February","March","April","May","June","July","August","September","October","November","December"]
+    const chunks = lodash.chunk(months, 3);
+    console.log(chunks)
 
-router.get('/test-me1', function (req, res) {
-    res.send('My second ever api!')
-});
+    //tail
+    const arrOdd = []
+    for(let i=0; i<10; i++){
+    arrOdd[i] = 2*i+1;
+    }
+    const tails = lodash.tail(arrOdd)
+    console.log(tails)
 
-router.get('/test-me2', function (req, res) {
-    res.send('My third api!')
-});
+    //union
+    const   arr1=[1,2,3,4],
+            arr2=[3,4,5,6],
+            arr3=[5,6,7],
+            arr4=[6,7],
+            arr5 =[6,7,8,9,10];
+    const unions = lodash.union(arr1,arr2,arr3,arr4,arr5);
+    console.log(unions);
 
-router.get('/test-me3', function (req, res) {
-    res.send('My 4th api!')
-});
-
-router.get('/test-me4', function (req, res) {
-    res.send('My last api!')
-});
+    //fromPair
+    const pairs = [["horror","The shining"],["drama","Titanic"],["thriller","Shutter"],["fantasy","Pans Labyrinth"]]
+    const ObjectPairs = lodash.fromPairs(pairs);
+    console.log(ObjectPairs);
+    
+    res.send('My hello api!, My chunk, tail, union and form pairs assignment executed')
+} )
 
 module.exports = router;
 // adding this comment for no reason
