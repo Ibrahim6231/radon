@@ -55,7 +55,28 @@ const authorsByPrice = async function(req, res){
     // )
     res.send({msg: arr})
 }
+// optional questions : 
+//Q.1
+const booksById = async function(req, res) {
+   
+  const pathParams = req.params.authorId;
+    const relevantBooks = await bookModel.find({author_id : pathParams}).select({bookName:1, _id:0})
+    res.send({msg: relevantBooks});
+}
 
+//Q.2
+//// const authorByAge = async function(req, res){
+//     let author = await authorModel.find({age: {$gte : 50}}).select({author_name: 1, age:1, _id:0, author_id:1});
+//     const ids = author.map((x)=> x.author_id);
+
+//     let book = await bookModel.find({ratings: {$gte:4}, author_id: {$in: ids}}).select({_id:0});
+//     book = book.map((x)=> x.author_id);
+//     author = await authorModel.find({author_name : {$in : book}}).select({autor_name:1, _id:0});
+
+    
+
+//     res.send(author);
+// } 
 
 
 
@@ -64,4 +85,6 @@ module.exports.createAuthor = createAuthor;
 module.exports.chetanBhagatBooks = chetanBhagatBooks;
 module.exports.authorAndUpdate = authorAndUpdate;
 module.exports.authorsByPrice = authorsByPrice;
+module.exports.booksByID = booksById;
+// module.exports.authorByAge = authorByAge;
 
