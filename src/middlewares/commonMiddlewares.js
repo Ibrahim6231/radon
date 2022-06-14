@@ -1,26 +1,39 @@
+const orderModel = require("../models/orderModel");
+const userModel = require('../models/userModel.js');
+const productModel = require('../models/productModel.js');
 
-const mid1= function ( req, res, next) {
-    req.falana= "hi there. i am adding something new to the req object"
-    console.log("Hi I am a middleware named Mid1")
-    next()
+const checkHeaders = async function(req, res, next){
+    const reqHeaderData = req.headers.isfreeappuser;
+    if(reqHeaderData){
+        next();
+        // res.send({msg: reqHeaderData})
+    }else{
+        res.send("ERROR: The request is missing a mandatory header");
+    }
+
 }
 
-const mid2= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid2")
-    next()
+//MW2
+const checkId = async function(req, res, next){
+    const uId = req.body.userId;
+    const user = await userModel.findById(uId);
+    const pId = req.body.productId
+    const product = await productModel.findById(pId);
+  
+
+    if(uId){
+        if(user){
+            if(pId){
+                if(product){
+                    console.log("user and product id's verified")
+                    next();
+
+                }else(res.send("error: this product is not availables in our stores"))
+            }else{res.send("error: must enter a product ID")}
+        }else{res.send("error: this user is not available in our users collection")}
+    }else{res.send("error: must enter a user ID")}
+
 }
 
-const mid3= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid3")
-    next()
-}
-
-const mid4= function ( req, res, next) {
-    console.log("Hi I am a middleware named Mid4")
-    next()
-}
-
-module.exports.mid1= mid1
-module.exports.mid2= mid2
-module.exports.mid3= mid3
-module.exports.mid4= mid4
+module.exports.checkHeaders =checkHeaders;
+module.exports.checkId = checkId;
