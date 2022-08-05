@@ -100,3 +100,11 @@ ctrl+tab => switch b/tabs
 */
 
 //console.log(Boolean(!(""))) => not(false) => true
+
+// function checkStatus(existStatus, cancValue, reqStatus) {
+//     if(cancValue && existStatus==="pending" && ["cancelled", "completed"].includes(reqStatus)) return true 
+//     if (cancValue===false && existStatus==="pending" && reqStatus==="completed") return true
+//     return false
+// }
+
+// if (!checkStatus(findOrder.status, findOrder.cancellable, status)) return res.status(400).send({ status: false, message: `existing status is ${findOrder.status} & cancellable is ${findOrder.cancellable} => so ${status} status cannot be updated`})

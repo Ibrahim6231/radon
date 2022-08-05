@@ -37,7 +37,7 @@ updateOrder(assuming cancellable:true)
 pending     completed   completed       ✔🟢
 pending     cancelled   cancelled       possible
 
-completed   cancelled   cancelled       ✔🟢
+completed   cancelled   cancelled       ✔🟢???
 completed   pending     pending         ?err
 
 cancelled   pending     pending         ?err
