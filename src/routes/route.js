@@ -8,8 +8,6 @@ const {createCart, updateCart, getCart, deleteCart}= require("../controllers/car
 const{createOrder,updateOrder} =require("../controllers/orderController");
 
 
-
-
 //APIS for user
 router.post("/register", createUser);
 router.post("/login", userLogin);
@@ -31,11 +29,9 @@ router.get('/users/:userId/cart',authentication,authorisation,getCart);  //authe
 router.delete('/users/:userId/cart',authentication,authorisation,deleteCart) //authentication + authorisation (TC)
 
 //=================================================================================
-router.post("/users/:userId/orders", authentication, authorisation, createOrder)
-
 //APIs for order
-router.post("/users/:userId/orders",createOrder)     // POST /users/:userId/orders
-router.put('/users/:userId/orders',updateOrder)      //PUT /users/:userId/orders
+router.post("/users/:userId/orders", authentication, authorisation, createOrder)     // POST /users/:userId/orders
+router.put('/users/:userId/orders', authentication, authorisation, updateOrder)      //PUT /users/:userId/orders
 
 //--------------------------------------------------------------------------
 router.all("/**", function (req, res) {

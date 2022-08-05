@@ -19,10 +19,10 @@ const createOrder = async (req, res)=>{ //authentication >> authotrisation >> cr
         const userId = req.params.userId
         let { cartId, cancellable } = req.body
 
-        if (!isValidRequestBody(req.body))  return res.status(400).send({ status: false, message: "can't proceed the request with empty body" });
+        if (Object.keys(req.body).length === 0)  return res.status(400).send({ status: false, message: "can't proceed the request with empty body" });
         const error = {};
         if(!mongoose.Types.ObjectId.isValid(userId))                              error['userId error']      =       "userId is not valid" ;
-        if (!isValid(cartId))                                                     error['cartId error']      =       "Please provide The cartId" 
+        if (!cartId)                                                              error['cartId error']      =       "Please provide The cartId" 
         if (cartId && !(mongoose.Types.ObjectId.isValid(cartId)))                 error['cartId error']      =       "cartId is not valid" ;
         if (cancellable && !["true", "false", true, false].includes(cancellable)) error['cancellable error'] =       "cancellable value should be a Boolean";
         if(Object.keys(error).length > 0) return res.status(400).send({status:false, message:error})
@@ -67,8 +67,9 @@ const updateOrder = async function (req, res) { //authentication >> authotrisati
         let { status, orderId } = req.body
 
         if(!isValidObjectId(userId)) return res.status(400).send({ status: false, message: "userId is invalid" })
+        if(!(orderId)) return res.status(400).send({ status: false, message: "orderId is not present" });
         if(!isValidObjectId(orderId)) return res.status(400).send({ status: false, message: "orderId is invalid" });
-        if(!status) return res.status(400).send({status:false, message:"please enter the status to update"})
+        if(!status) return res.status(400).send({status:false, message:"please enter the status to update"}) //?mandatory?
 
         const arr = ["pending", "completed", "cancelled"]
         if(status && (!arr.includes(status))) return res.status(400).send({ status: false, message: `status should be in ${arr}`})
