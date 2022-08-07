@@ -4,13 +4,12 @@ const route = require('./routes/route.js');
 const mongoose = require('mongoose');
 const multer = require('multer');
 const app = express();
-//const { AppConfig } = require('aws-sdk');
 
 
 
-app.use(bodyParser.json()); //express.json();
+app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({extended:true}));
-app.use(multer().any());    //without it req.files = undefined , if file missing in req => req.files = []
+app.use(multer().any());   
 app.use('/', route);
 
 
@@ -27,24 +26,12 @@ mongoose.connect('mongodb+srv://RinkiPradhan:moShtmwBC2cEopn2@cluster0.xs93j.mon
 
 
 app.listen(process.env.PORT || 3000, function(){return console.log(`Express is running on port🤣 ${process.env.PORT || 3000}`)});
+
+
+
+
+
+
+
 //dotenv
-//.env
-
-/*
-updateOrder(assuming cancellable:true)
-#inDoc      #inReqBody  #afterResponse
-
-pending     completed   completed       ✔🟢
-pending     cancelled   cancelled       possible
-
-completed   cancelled   cancelled       ✔🟢???
-completed   pending     pending         ?err
-
-cancelled   pending     pending         ?err
-cancelled   completed   completed       ?err
-
-is it order api or delivery api? => delivery
-is it order api or delivery api? => order, 
-
-*/
-//order to delivery
+ //multer^ :req.files => UD, multer + key^ : req.files => UD; multer+key+filesNotSelected : req.files=> [];
