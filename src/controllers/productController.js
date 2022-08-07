@@ -35,7 +35,7 @@ const createProduct = async function(req, res){
 const getProductsByQuery = async function(req, res){      
    try {
       let {size, name, priceGreaterThan, priceLessThan, priceSort, ...rest} = req.query
-      console.log(rest,typeof rest,Object.keys(rest).length,Object.keys(rest))
+     
       if(Object.keys(rest).length >0) return res.status(400).send({status:false, message:"enter only valid filter key in queryParams such as size, name, priceGreaterThan, priceLessThan, priceSort"}) //must recheck
 
 
